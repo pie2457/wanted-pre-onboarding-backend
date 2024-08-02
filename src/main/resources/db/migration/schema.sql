@@ -9,7 +9,9 @@ create table company
 create table recruitment_notice
 (
     id                   int auto_increment comment '채용공고 시퀀스' primary key,
+    company_id           int          not null comment '회사 id',
     recruit_position     varchar(256) not null comment '채용 포지션',
+    recruit_content      longtext     not null comment '채용 내용',
     recruit_compensation int          not null comment '채용 보상금 (원)'
 ) comment '채용 공고';
 
