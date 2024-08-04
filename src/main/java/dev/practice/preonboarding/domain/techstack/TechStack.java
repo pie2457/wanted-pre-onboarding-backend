@@ -1,4 +1,4 @@
-package dev.practice.preonboarding.domain;
+package dev.practice.preonboarding.domain.techstack;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import dev.practice.preonboarding.domain.recruitment_notice.RecruitmentNotice;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class RecruitmentNoticeTechStackMapping {
+public class TechStack {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +26,5 @@ public class RecruitmentNoticeTechStackMapping {
 	@JoinColumn(name = "recruitment_notice_id")
 	private RecruitmentNotice recruitmentNotice;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tech_stack_id")
-	private TechStack techStack;
+	private String name;
 }
