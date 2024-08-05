@@ -1,0 +1,14 @@
+### 채용공고 등록
+POST http://localhost:8080/recruit
+Content-Type: application/json
+
+{
+  "companyId": 1,
+  "position": "백엔드",
+  "content": "신입 인턴 구합니다.",
+  "compensation": 1000000,
+  "techStacks": [
+    1,
+    2
+  ]
+}
