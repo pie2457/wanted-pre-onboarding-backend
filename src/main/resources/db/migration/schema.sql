@@ -8,18 +8,18 @@ create table company
 
 create table recruitment_notice
 (
-    id                   int auto_increment comment '채용공고 시퀀스' primary key,
-    company_id           int          not null comment '회사 id',
-    recruit_position     varchar(256) not null comment '채용 포지션',
-    recruit_content      longtext     not null comment '채용 내용',
-    recruit_compensation int          not null comment '채용 보상금 (원)'
+    id           int auto_increment comment '채용공고 시퀀스' primary key,
+    company_id   int          not null comment '회사 id',
+    position     varchar(256) not null comment '채용 포지션',
+    content      longtext     not null comment '채용 내용',
+    compensation int          not null comment '채용 보상금 (원)'
 ) comment '채용 공고';
 
 create table recruitment_notice_tech_stack_mapping
 (
-    id                    int auto_increment comment '채용 공고, 기술 스택 매핑 시퀀스' primary key,
-    recruitment_notice_no int not null comment '채용 공고 시퀀스',
-    tech_stack_no         int not null comment '기술 스택 시퀀스'
+    recruitment_notice_id int not null comment '채용 공고 시퀀스',
+    tech_stack_id         int not null comment '기술 스택 시퀀스',
+    primary key (recruitment_notice_id, tech_stack_id)
 ) comment '채용 공고, 기술 스택 매핑 테이블';
 
 create table tech_stack
