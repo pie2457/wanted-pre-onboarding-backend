@@ -1,4 +1,4 @@
-package dev.practice.preonboarding.domain;
+package dev.practice.preonboarding.domain.company;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
