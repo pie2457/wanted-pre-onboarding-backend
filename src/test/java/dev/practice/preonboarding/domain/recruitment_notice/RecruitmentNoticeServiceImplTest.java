@@ -10,6 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import dev.practice.preonboarding.domain.DomainTestSupport;
+import dev.practice.preonboarding.domain.recruitment_notice_tech_stack.RecruitmentNoticeTechStackMapping;
+import dev.practice.preonboarding.domain.recruitment_notice_tech_stack.RecruitmentNoticeTechStackMappingStore;
 
 @DisplayName("비즈니스 로직 - 채용공고")
 class RecruitmentNoticeServiceImplTest extends DomainTestSupport {
