@@ -1,4 +1,4 @@
-package dev.practice.preonboarding.domain.recruitment_notice;
+package dev.practice.preonboarding.domain.recruitment_notice_tech_stack;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;

@@ -1,11 +1,11 @@
-package dev.practice.preonboarding.infrastructures;
+package dev.practice.preonboarding.infrastructures.recruitment_notice_tech_stack;
 
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import dev.practice.preonboarding.domain.recruitment_notice.RecruitmentNoticeTechStackMapping;
-import dev.practice.preonboarding.domain.recruitment_notice.RecruitmentNoticeTechStackMappingStore;
+import dev.practice.preonboarding.domain.recruitment_notice_tech_stack.RecruitmentNoticeTechStackMapping;
+import dev.practice.preonboarding.domain.recruitment_notice_tech_stack.RecruitmentNoticeTechStackMappingStore;
 import lombok.RequiredArgsConstructor;
 
 @Component
