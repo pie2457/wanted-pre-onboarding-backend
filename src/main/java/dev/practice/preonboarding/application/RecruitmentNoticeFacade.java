@@ -15,4 +15,9 @@ public class RecruitmentNoticeFacade {
 		RecruitmentNoticeCommand.RegisterRecruitmentNoticeRequest request, Long companyId) {
 		recruitmentNoticeService.registerRecruitmentNotice(request, companyId);
 	}
+
+	public void modifyRecruitmentNotice(
+		RecruitmentNoticeCommand.ModifyRecruitmentNoticeRequest request, Long recruitmentId) {
+		recruitmentNoticeService.modifyRecruitmentNotice(request, recruitmentId);
+	}
 }

@@ -26,4 +26,14 @@ public class RecruitmentNoticeCommand {
 				.build();
 		}
 	}
+
+	@Getter
+	@Builder
+	@ToString
+	public static class ModifyRecruitmentNoticeRequest {
+		private final String position;
+		private final String content;
+		private final int compensation;
+		private final List<Long> techStacks;
+	}
 }

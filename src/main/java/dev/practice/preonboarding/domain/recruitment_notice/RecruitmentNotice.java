@@ -30,4 +30,10 @@ public class RecruitmentNotice {
 		this.content = content;
 		this.compensation = compensation;
 	}
+
+	public void modify(RecruitmentNoticeCommand.ModifyRecruitmentNoticeRequest request) {
+		this.position = request.getPosition();
+		this.content = request.getContent();
+		this.compensation = request.getCompensation();
+	}
 }

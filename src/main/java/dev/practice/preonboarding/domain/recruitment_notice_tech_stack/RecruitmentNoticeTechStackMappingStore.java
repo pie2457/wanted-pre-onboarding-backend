@@ -5,4 +5,6 @@ import java.util.List;
 public interface RecruitmentNoticeTechStackMappingStore {
 
 	List<RecruitmentNoticeTechStackMapping> saveAll(List<RecruitmentNoticeTechStackMapping> mapping);
+
+	void deleteAllByRecruitmentNoticeId(Long recruitmentNoticeId);
 }

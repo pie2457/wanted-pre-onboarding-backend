@@ -17,4 +17,9 @@ public class RecruitmentNoticeTechStackMappingStoreImpl implements RecruitmentNo
 	public List<RecruitmentNoticeTechStackMapping> saveAll(List<RecruitmentNoticeTechStackMapping> mappings) {
 		return mappingRepository.saveAll(mappings);
 	}
+
+	@Override
+	public void deleteAllByRecruitmentNoticeId(Long recruitmentNoticeId) {
+		mappingRepository.deleteAllByRecruitmentNoticeId(recruitmentNoticeId);
+	}
 }

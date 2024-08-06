@@ -15,4 +15,7 @@ public interface RecruitmentNoticeDtoMapper {
 
 	RecruitmentNoticeCommand.RegisterRecruitmentNoticeRequest of(
 		RecruitmentNoticeDto.RegisterRecruitmentNoticeRequest request);
+
+	RecruitmentNoticeCommand.ModifyRecruitmentNoticeRequest of(
+		RecruitmentNoticeDto.ModifyRecruitmentNoticeRequest request);
 }

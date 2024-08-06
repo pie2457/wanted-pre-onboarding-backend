@@ -2,7 +2,9 @@ package dev.practice.preonboarding.interfaces.recruitment_notice;
 
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,5 +26,14 @@ public class RecruitmentNoticeApiController {
 		var command = recruitmentNoticeDtoMapper.of(request);
 		recruitmentNoticeFacade.registerRecruitmentNotice(command, request.getCompanyId());
 		return CommonResponse.success(null, "OK");
+	}
+
+	@PutMapping("/{recruitmentId}")
+	public CommonResponse modifyRecruitmentNotice(
+		@PathVariable Long recruitmentId,
+		@RequestBody @Valid RecruitmentNoticeDto.ModifyRecruitmentNoticeRequest request) {
+		var command = recruitmentNoticeDtoMapper.of(request);
+		recruitmentNoticeFacade.modifyRecruitmentNotice(command, recruitmentId);
+		return CommonResponse.success("OK");
 	}
 }
