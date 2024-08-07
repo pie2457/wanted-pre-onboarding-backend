@@ -12,3 +12,17 @@ Content-Type: application/json
     2
   ]
 }
+
+### 채용공고 수정
+PATCH http://localhost:8080/recruit/1
+Content-Type: application/json
+
+{
+  "position": "백엔드",
+  "content": "신입 백엔드 인턴 구합니다.",
+  "compensation": 1500000,
+  "techStacks": [
+    2,
+    3
+  ]
+}

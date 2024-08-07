@@ -29,4 +29,18 @@ public class RecruitmentNoticeDto {
 		@NotNull(message = "techStack 는 필수값 입니다.")
 		private List<Long> techStacks;
 	}
+
+	@Getter
+	@Setter(value = PROTECTED)
+	@ToString
+	public static class ModifyRecruitmentNoticeRequest {
+		@NotBlank(message = "position 는 필수값 입니다.")
+		private String position;
+		@NotBlank(message = "content 는 필수값 입니다.")
+		private String content;
+		@Positive(message = "compensation 는 필수값 입니다.")
+		private int compensation;
+		@NotNull(message = "techStack 는 필수값 입니다.")
+		private List<Long> techStacks;
+	}
 }

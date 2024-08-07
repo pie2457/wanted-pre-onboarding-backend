@@ -1,4 +1,4 @@
-package dev.practice.preonboarding.infrastructures;
+package dev.practice.preonboarding.infrastructures.recruitment_notice;
 
 import org.springframework.stereotype.Component;
 
