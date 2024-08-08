@@ -20,4 +20,8 @@ public class RecruitmentNoticeFacade {
 		RecruitmentNoticeCommand.ModifyRecruitmentNoticeRequest request, Long recruitmentId) {
 		recruitmentNoticeService.modifyRecruitmentNotice(request, recruitmentId);
 	}
+
+	public void deleteRecruitmentNotice(Long recruitmentNoticeId) {
+		recruitmentNoticeService.deleteRecruitmentNotice(recruitmentNoticeId);
+	}
 }
