@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
 
+import dev.practice.preonboarding.common.exception.EntityNotFoundException;
 import dev.practice.preonboarding.domain.DomainTestSupport;
 import dev.practice.preonboarding.domain.recruitment_notice_tech_stack.RecruitmentNoticeTechStackMapping;
 import dev.practice.preonboarding.domain.recruitment_notice_tech_stack.RecruitmentNoticeTechStackMappingStore;
@@ -33,7 +34,7 @@ class RecruitmentNoticeServiceImplTest extends DomainTestSupport {
 
 	@DisplayName("채용공고 등록에 성공한다.")
 	@Test
-	void given_whenRegisterRecruitmentNotice_thenSuccess() {
+	void givenRegisterRequest_whenRegisterRecruitmentNotice_thenSuccess() {
 		// given
 		var request = createRegisterRecruitmentNotice();
 
@@ -62,10 +63,9 @@ class RecruitmentNoticeServiceImplTest extends DomainTestSupport {
 
 	@DisplayName("채용공고 수정에 성공한다.")
 	@Test
-	void given_whenModifyRecruitmentNotice_thenSuccess() {
+	void givenModifyRequest_whenModifyRecruitmentNotice_thenSuccess() {
 		// given
-		RecruitmentNotice recruitmentNotice = Mockito.spy(RecruitmentNotice.class);
-		when(recruitmentNotice.getId()).thenAnswer((Answer<Long>)invocationOnMock -> 1L);
+		RecruitmentNotice recruitmentNotice = getSpyRecruitmentNotice();
 		given(recruitmentNoticeReader.findByRecruitmentNoticeId(1L)).willReturn(recruitmentNotice);
 
 		// when
@@ -86,6 +86,12 @@ class RecruitmentNoticeServiceImplTest extends DomainTestSupport {
 		);
 	}
 
+	private RecruitmentNotice getSpyRecruitmentNotice() {
+		RecruitmentNotice recruitmentNotice = Mockito.spy(RecruitmentNotice.class);
+		when(recruitmentNotice.getId()).thenAnswer((Answer<Long>)invocationOnMock -> 1L);
+		return recruitmentNotice;
+	}
+
 	private RecruitmentNoticeCommand.ModifyRecruitmentNoticeRequest createModifyRecruitmentNotice() {
 		return RecruitmentNoticeCommand.ModifyRecruitmentNoticeRequest.builder()
 			.content("신입 백엔드 인턴 구합니다.")
@@ -93,5 +99,38 @@ class RecruitmentNoticeServiceImplTest extends DomainTestSupport {
 			.position("백엔드")
 			.techStacks(List.of(1L, 2L, 3L))
 			.build();
+	}
+
+	@DisplayName("채용공고 삭제에 성공한다.")
+	@Test
+	void givenRecruitmentNoticeId_whenDeleteRecruitmentNotice_thenSuccess() {
+		// given
+		RecruitmentNotice recruitmentNotice = getSpyRecruitmentNotice();
+		given(recruitmentNoticeReader.existsByRecruitmentId(recruitmentNotice.getId())).willReturn(true);
+
+		// when
+		recruitmentNoticeService.deleteRecruitmentNotice(recruitmentNotice.getId());
+
+		// then
+		then(recruitmentNoticeReader).should(times(1)).existsByRecruitmentId(recruitmentNotice.getId());
+		then(recruitmentNoticeStore).should(times(1)).delete(recruitmentNotice.getId());
+		then(mappingStore).should(times(1)).deleteAllByRecruitmentNoticeId(recruitmentNotice.getId());
+	}
+
+	@DisplayName("이미 삭제된 채용공고를 삭제하려고 하면 에러가 발생한다.")
+	@Test
+	void givenRecruitmentNoticeId_whenDeleteRecruitmentNotice_thenThrowsException() {
+		// given
+		RecruitmentNotice recruitmentNotice = getSpyRecruitmentNotice();
+		given(recruitmentNoticeReader.existsByRecruitmentId(recruitmentNotice.getId())).willReturn(false);
+
+		// when & then
+		assertThatThrownBy(
+			() -> recruitmentNoticeService.deleteRecruitmentNotice(recruitmentNotice.getId()))
+			.isInstanceOf(EntityNotFoundException.class);
+
+		then(recruitmentNoticeReader).should(times(1)).existsByRecruitmentId(recruitmentNotice.getId());
+		then(recruitmentNoticeStore).should(times(0)).delete(recruitmentNotice.getId());
+		then(mappingStore).should(times(0)).deleteAllByRecruitmentNoticeId(recruitmentNotice.getId());
 	}
 }
