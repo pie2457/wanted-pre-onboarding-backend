@@ -7,4 +7,6 @@ public interface RecruitmentNoticeService {
 
 	void modifyRecruitmentNotice(
 		RecruitmentNoticeCommand.ModifyRecruitmentNoticeRequest request, Long recruitmentId);
+
+	void deleteRecruitmentNotice(Long recruitmentId);
 }

@@ -15,4 +15,9 @@ public class RecruitmentNoticeStoreImpl implements RecruitmentNoticeStore {
 	public RecruitmentNotice save(RecruitmentNotice recruitmentNotice) {
 		return recruitmentNoticeRepository.save(recruitmentNotice);
 	}
+
+	@Override
+	public void delete(Long recruitmentNoticeId) {
+		recruitmentNoticeRepository.deleteById(recruitmentNoticeId);
+	}
 }

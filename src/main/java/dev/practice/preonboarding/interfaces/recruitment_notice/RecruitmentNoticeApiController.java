@@ -2,6 +2,7 @@ package dev.practice.preonboarding.interfaces.recruitment_notice;
 
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -34,6 +35,12 @@ public class RecruitmentNoticeApiController {
 		@RequestBody @Valid RecruitmentNoticeDto.ModifyRecruitmentNoticeRequest request) {
 		var command = recruitmentNoticeDtoMapper.of(request);
 		recruitmentNoticeFacade.modifyRecruitmentNotice(command, recruitmentId);
+		return CommonResponse.success("OK");
+	}
+
+	@DeleteMapping("/{recruitmentId}")
+	public CommonResponse deleteRecruitmentNotice(@PathVariable Long recruitmentId) {
+		recruitmentNoticeFacade.deleteRecruitmentNotice(recruitmentId);
 		return CommonResponse.success("OK");
 	}
 }

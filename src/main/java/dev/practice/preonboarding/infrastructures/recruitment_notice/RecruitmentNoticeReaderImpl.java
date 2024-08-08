@@ -17,4 +17,9 @@ public class RecruitmentNoticeReaderImpl implements RecruitmentNoticeReader {
 		return recruitmentNoticeRepository.findById(recruitmentId)
 			.orElseThrow(EntityNotFoundException::new);
 	}
+
+	@Override
+	public boolean existsByRecruitmentId(Long recruitmentId) {
+		return recruitmentNoticeRepository.existsById(recruitmentId);
+	}
 }

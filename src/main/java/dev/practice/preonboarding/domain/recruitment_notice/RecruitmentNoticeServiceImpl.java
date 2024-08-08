@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import dev.practice.preonboarding.common.exception.EntityNotFoundException;
 import dev.practice.preonboarding.domain.recruitment_notice_tech_stack.RecruitmentNoticeTechStackMapping;
 import dev.practice.preonboarding.domain.recruitment_notice_tech_stack.RecruitmentNoticeTechStackMappingStore;
 import lombok.RequiredArgsConstructor;
@@ -45,5 +46,15 @@ public class RecruitmentNoticeServiceImpl implements RecruitmentNoticeService {
 			.map(id -> new RecruitmentNoticeTechStackMapping(notice, id))
 			.collect(Collectors.toList());
 		mappingStore.saveAll(techStackMappings);
+	}
+
+	@Override
+	@Transactional
+	public void deleteRecruitmentNotice(Long recruitmentId) {
+		if (!recruitmentNoticeReader.existsByRecruitmentId(recruitmentId)) {
+			throw new EntityNotFoundException();
+		}
+		recruitmentNoticeStore.delete(recruitmentId);
+		mappingStore.deleteAllByRecruitmentNoticeId(recruitmentId);
 	}
 }
