@@ -2,6 +2,8 @@ package dev.practice.preonboarding.interfaces.recruitment_notice;
 
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,36 +13,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.practice.preonboarding.application.RecruitmentNoticeFacade;
-import dev.practice.preonboarding.common.response.CommonResponse;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/recruit")
+@RequestMapping("/recruitment")
 public class RecruitmentNoticeApiController {
 	private final RecruitmentNoticeFacade recruitmentNoticeFacade;
 	private final RecruitmentNoticeDtoMapper recruitmentNoticeDtoMapper;
 
 	@PostMapping
-	public CommonResponse registerRecruitmentNotice(
+	public ResponseEntity<Void> registerRecruitmentNotice(
 		@RequestBody @Valid RecruitmentNoticeDto.RegisterRecruitmentNoticeRequest request) {
 		var command = recruitmentNoticeDtoMapper.of(request);
 		recruitmentNoticeFacade.registerRecruitmentNotice(command, request.getCompanyId());
-		return CommonResponse.success(null, "OK");
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
 	@PutMapping("/{recruitmentId}")
-	public CommonResponse modifyRecruitmentNotice(
+	public ResponseEntity<Void> modifyRecruitmentNotice(
 		@PathVariable Long recruitmentId,
 		@RequestBody @Valid RecruitmentNoticeDto.ModifyRecruitmentNoticeRequest request) {
 		var command = recruitmentNoticeDtoMapper.of(request);
 		recruitmentNoticeFacade.modifyRecruitmentNotice(command, recruitmentId);
-		return CommonResponse.success("OK");
+		return ResponseEntity.noContent().build();
 	}
 
 	@DeleteMapping("/{recruitmentId}")
-	public CommonResponse deleteRecruitmentNotice(@PathVariable Long recruitmentId) {
+	public ResponseEntity<Void> deleteRecruitmentNotice(@PathVariable Long recruitmentId) {
 		recruitmentNoticeFacade.deleteRecruitmentNotice(recruitmentId);
-		return CommonResponse.success("OK");
+		return ResponseEntity.noContent().build();
 	}
 }

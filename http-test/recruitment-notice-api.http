@@ -1,5 +1,5 @@
 ### 채용공고 등록
-POST http://localhost:8080/recruit
+POST http://localhost:8080/recruitment
 Content-Type: application/json
 
 {
@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 
 ### 채용공고 수정
-PATCH http://localhost:8080/recruit/1
+PATCH http://localhost:8080/recruitment/1
 Content-Type: application/json
 
 {
@@ -28,5 +28,5 @@ Content-Type: application/json
 }
 
 ### 채용공고 삭제
-DELETE http://localhost:8080/recruit/2
+DELETE http://localhost:8080/recruitment/2
 Content-Type: application/json
