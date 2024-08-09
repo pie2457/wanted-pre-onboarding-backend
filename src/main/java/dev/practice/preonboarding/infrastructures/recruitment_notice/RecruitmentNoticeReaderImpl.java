@@ -1,5 +1,7 @@
 package dev.practice.preonboarding.infrastructures.recruitment_notice;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import dev.practice.preonboarding.common.exception.EntityNotFoundException;
@@ -21,5 +23,10 @@ public class RecruitmentNoticeReaderImpl implements RecruitmentNoticeReader {
 	@Override
 	public boolean existsByRecruitmentId(Long recruitmentId) {
 		return recruitmentNoticeRepository.existsById(recruitmentId);
+	}
+
+	@Override
+	public List<RecruitmentNotice> findAll() {
+		return recruitmentNoticeRepository.findAll();
 	}
 }

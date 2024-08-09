@@ -1,5 +1,7 @@
 package dev.practice.preonboarding.domain.recruitment_notice;
 
+import java.util.List;
+
 public interface RecruitmentNoticeService {
 
 	void registerRecruitmentNotice(
@@ -9,4 +11,6 @@ public interface RecruitmentNoticeService {
 		RecruitmentNoticeCommand.ModifyRecruitmentNoticeRequest request, Long recruitmentId);
 
 	void deleteRecruitmentNotice(Long recruitmentId);
+
+	List<RecruitmentNoticeInfo.RecruitmentNoticeList> findAllRecruitmentNotice();
 }

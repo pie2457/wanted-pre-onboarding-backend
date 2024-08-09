@@ -1,5 +1,7 @@
 package dev.practice.preonboarding.infrastructures.recruitment_notice_tech_stack;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -13,4 +15,8 @@ public interface RecruitmentNoticeTechStackMappingRepository
 	@Query("delete from RecruitmentNoticeTechStackMapping mapping "
 		+ "where mapping.mappingId.recruitmentNoticeId = :recruitmentNoticeId")
 	void deleteAllByRecruitmentNoticeId(Long recruitmentNoticeId);
+
+	List<RecruitmentNoticeTechStackMapping> findByMappingId_RecruitmentNoticeId(Long recruitmentNoticeId);
+
+	List<RecruitmentNoticeTechStackMapping> findByMappingId_RecruitmentNoticeIdIn(List<Long> recruitmentNoticeIds);
 }
