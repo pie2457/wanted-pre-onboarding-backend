@@ -18,6 +18,7 @@ import dev.practice.preonboarding.common.exception.EntityNotFoundException;
 import dev.practice.preonboarding.domain.DomainTestSupport;
 import dev.practice.preonboarding.domain.recruitment_notice_tech_stack.RecruitmentNoticeTechStackMapping;
 import dev.practice.preonboarding.domain.recruitment_notice_tech_stack.RecruitmentNoticeTechStackMappingStore;
+import dev.practice.preonboarding.infrastructures.recruitment_notice_tech_stack.RecruitmentNoticeTechStackMappingFactoryImpl;
 
 @DisplayName("비즈니스 로직 - 채용공고")
 class RecruitmentNoticeServiceImplTest extends DomainTestSupport {
@@ -29,6 +30,8 @@ class RecruitmentNoticeServiceImplTest extends DomainTestSupport {
 	private RecruitmentNoticeTechStackMappingStore mappingStore;
 	@Mock
 	private RecruitmentNoticeReader recruitmentNoticeReader;
+	@Mock
+	private RecruitmentNoticeTechStackMappingFactoryImpl mappingFactory;
 	@InjectMocks
 	private RecruitmentNoticeServiceImpl recruitmentNoticeService;
 
@@ -66,7 +69,7 @@ class RecruitmentNoticeServiceImplTest extends DomainTestSupport {
 	void givenModifyRequest_whenModifyRecruitmentNotice_thenSuccess() {
 		// given
 		RecruitmentNotice recruitmentNotice = getSpyRecruitmentNotice();
-		given(recruitmentNoticeReader.findByRecruitmentNoticeId(1L)).willReturn(recruitmentNotice);
+		given(recruitmentNoticeReader.findById(1L)).willReturn(recruitmentNotice);
 
 		// when
 		var modifyRequest = createModifyRecruitmentNotice();
@@ -76,7 +79,7 @@ class RecruitmentNoticeServiceImplTest extends DomainTestSupport {
 		ArgumentCaptor<List<RecruitmentNoticeTechStackMapping>> captor = ArgumentCaptor.forClass(List.class);
 
 		then(mappingStore).should().saveAll(captor.capture());
-		then(recruitmentNoticeReader).should(times(1)).findByRecruitmentNoticeId(recruitmentNotice.getId());
+		then(recruitmentNoticeReader).should(times(1)).findById(recruitmentNotice.getId());
 		then(mappingStore).should(times(1)).deleteAllByRecruitmentNoticeId(recruitmentNotice.getId());
 
 		assertAll(
@@ -132,5 +135,21 @@ class RecruitmentNoticeServiceImplTest extends DomainTestSupport {
 		then(recruitmentNoticeReader).should(times(1)).existsByRecruitmentId(recruitmentNotice.getId());
 		then(recruitmentNoticeStore).should(times(0)).delete(recruitmentNotice.getId());
 		then(mappingStore).should(times(0)).deleteAllByRecruitmentNoticeId(recruitmentNotice.getId());
+	}
+
+	@DisplayName("존재하지 않는 ID로 채용공고 조회 시 에러가 발생한다.")
+	@Test
+	void givenRecruitmentId_whenDetailsRecruitmentNotice_thenThrowsException() {
+		// given
+		RecruitmentNotice recruitmentNotice = getSpyRecruitmentNotice();
+		given(recruitmentNoticeReader.findById(recruitmentNotice.getId())).willThrow(EntityNotFoundException.class);
+
+		// when & then
+		assertThatThrownBy(
+			() -> recruitmentNoticeService.detailsRecruitmentNotice(recruitmentNotice.getId()))
+			.isInstanceOf(EntityNotFoundException.class);
+
+		then(recruitmentNoticeReader).should(times(1)).findById(recruitmentNotice.getId());
+		then(mappingFactory).should(times(0)).generateDetailsRecruitmentNotice(recruitmentNotice);
 	}
 }

@@ -3,13 +3,13 @@ POST http://localhost:8080/recruitment
 Content-Type: application/json
 
 {
-  "companyId": 1,
-  "position": "백엔드",
-  "content": "신입 인턴 구합니다.",
+  "companyId": 2,
+  "position": "프론트",
+  "content": "인턴 구합니다.",
   "compensation": 1000000,
   "techStacks": [
-    1,
-    2
+    2,
+    3
   ]
 }
 
@@ -33,4 +33,8 @@ Content-Type: application/json
 
 ### 채용공고 전체 목록 조회
 GET http://localhost:8080/recruitment
+Content-Type: application/json
+
+### 채용공고 상세 페이지 조회
+GET http://localhost:8080/recruitment/3
 Content-Type: application/json
