@@ -29,4 +29,32 @@ public class RecruitmentNoticeInfo {
 			this.techStacks = techStacks;
 		}
 	}
+
+	@Getter
+	@ToString
+	public static class DetailsRecruitmentNotice {
+		private final Long recruitmentNoticeId;
+		private final String companyName;
+		private final String country;
+		private final String region;
+		private final String recruitmentNoticePosition;
+		private final int recruitmentNoticeCompensation;
+		private final List<Long> techStacks;
+		private final String content;
+		private final List<Long> anotherRecruitmentNoticeIds;
+
+		public DetailsRecruitmentNotice(RecruitmentNotice recruitmentNotice, Company company,
+			List<Long> techStacks,
+			List<Long> anotherRecruitmentNoticeIds) {
+			this.recruitmentNoticeId = recruitmentNotice.getId();
+			this.companyName = company.getName();
+			this.country = company.getCountry();
+			this.region = company.getRegion();
+			this.recruitmentNoticePosition = recruitmentNotice.getPosition();
+			this.recruitmentNoticeCompensation = recruitmentNotice.getCompensation();
+			this.techStacks = techStacks;
+			this.content = recruitmentNotice.getContent();
+			this.anotherRecruitmentNoticeIds = anotherRecruitmentNoticeIds;
+		}
+	}
 }

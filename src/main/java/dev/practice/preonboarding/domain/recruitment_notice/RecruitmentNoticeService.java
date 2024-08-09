@@ -13,4 +13,6 @@ public interface RecruitmentNoticeService {
 	void deleteRecruitmentNotice(Long recruitmentId);
 
 	List<RecruitmentNoticeInfo.RecruitmentNoticeList> findAllRecruitmentNotice();
+
+	RecruitmentNoticeInfo.DetailsRecruitmentNotice detailsRecruitmentNotice(Long recruitmentNoticeId);
 }

@@ -15,7 +15,7 @@ public class RecruitmentNoticeReaderImpl implements RecruitmentNoticeReader {
 	private final RecruitmentNoticeRepository recruitmentNoticeRepository;
 
 	@Override
-	public RecruitmentNotice findByRecruitmentNoticeId(Long recruitmentId) {
+	public RecruitmentNotice findById(Long recruitmentId) {
 		return recruitmentNoticeRepository.findById(recruitmentId)
 			.orElseThrow(EntityNotFoundException::new);
 	}
@@ -28,5 +28,10 @@ public class RecruitmentNoticeReaderImpl implements RecruitmentNoticeReader {
 	@Override
 	public List<RecruitmentNotice> findAll() {
 		return recruitmentNoticeRepository.findAll();
+	}
+
+	@Override
+	public List<RecruitmentNotice> findAllByCompanyId(Long companyId) {
+		return recruitmentNoticeRepository.findByCompanyId(companyId);
 	}
 }

@@ -7,6 +7,9 @@ import dev.practice.preonboarding.domain.recruitment_notice.RecruitmentNoticeInf
 
 public interface RecruitmentNoticeTechStackMappingFactory {
 
-	List<RecruitmentNoticeInfo.RecruitmentNoticeList> generateRecruitmentNoticeDetails(
+	List<RecruitmentNoticeInfo.RecruitmentNoticeList> generateRecruitmentNoticesWithDetails(
 		List<RecruitmentNotice> recruitmentNotices);
+
+	RecruitmentNoticeInfo.DetailsRecruitmentNotice generateDetailsRecruitmentNotice(
+		RecruitmentNotice recruitmentNotice);
 }

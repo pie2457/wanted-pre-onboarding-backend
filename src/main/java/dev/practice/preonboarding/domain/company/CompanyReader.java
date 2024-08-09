@@ -5,4 +5,6 @@ import java.util.List;
 public interface CompanyReader {
 
 	List<Company> findAllByIdIn(List<Long> companyIds);
+
+	Company findById(Long companyId);
 }

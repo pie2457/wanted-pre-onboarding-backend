@@ -22,4 +22,7 @@ public interface RecruitmentNoticeDtoMapper {
 
 	RecruitmentNoticeDto.RecruitmentNoticeListResponse of(
 		RecruitmentNoticeInfo.RecruitmentNoticeList recruitmentNoticeList);
+
+	RecruitmentNoticeDto.DetailsRecruitmentNoticeResponse of(
+		RecruitmentNoticeInfo.DetailsRecruitmentNotice detailsRecruitmentNotice);
 }

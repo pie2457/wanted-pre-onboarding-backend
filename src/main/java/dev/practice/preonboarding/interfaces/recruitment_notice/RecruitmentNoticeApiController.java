@@ -59,4 +59,14 @@ public class RecruitmentNoticeApiController {
 			.collect(Collectors.toList());
 		return ResponseEntity.ok().body(response);
 	}
+
+	@GetMapping("/{recruitmentId}")
+	public ResponseEntity<RecruitmentNoticeDto.DetailsRecruitmentNoticeResponse> detailsRecruitmentNotice(
+		@PathVariable Long recruitmentId) {
+		RecruitmentNoticeInfo.DetailsRecruitmentNotice detailsRecruitmentNotice
+			= recruitmentNoticeFacade.detailsRecruitmentNotice(recruitmentId);
+		RecruitmentNoticeDto.DetailsRecruitmentNoticeResponse response = recruitmentNoticeDtoMapper.of(
+			detailsRecruitmentNotice);
+		return ResponseEntity.ok().body(response);
+	}
 }

@@ -31,4 +31,8 @@ public class RecruitmentNoticeFacade {
 	public List<RecruitmentNoticeInfo.RecruitmentNoticeList> findAllRecruitmentNotice() {
 		return recruitmentNoticeService.findAllRecruitmentNotice();
 	}
+
+	public RecruitmentNoticeInfo.DetailsRecruitmentNotice detailsRecruitmentNotice(Long recruitmentNoticeId) {
+		return recruitmentNoticeService.detailsRecruitmentNotice(recruitmentNoticeId);
+	}
 }

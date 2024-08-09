@@ -57,4 +57,19 @@ public class RecruitmentNoticeDto {
 		private final int recruitmentNoticeCompensation;
 		private final List<Long> techStacks;
 	}
+
+	@Getter
+	@Builder
+	@ToString
+	public static class DetailsRecruitmentNoticeResponse {
+		private final Long recruitmentNoticeId;
+		private final String companyName;
+		private final String country;
+		private final String region;
+		private final String recruitmentNoticePosition;
+		private final int recruitmentNoticeCompensation;
+		private final List<Long> techStacks;
+		private final String content;
+		private final List<Long> anotherRecruitmentNoticeIds;
+	}
 }

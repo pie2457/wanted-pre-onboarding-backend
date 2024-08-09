@@ -36,7 +36,7 @@ public class RecruitmentNoticeServiceImpl implements RecruitmentNoticeService {
 	public void modifyRecruitmentNotice(
 		RecruitmentNoticeCommand.ModifyRecruitmentNoticeRequest request, Long recruitmentId) {
 		RecruitmentNotice recruitmentNotice =
-			recruitmentNoticeReader.findByRecruitmentNoticeId(recruitmentId);
+			recruitmentNoticeReader.findById(recruitmentId);
 		recruitmentNotice.modify(request);
 
 		mappingStore.deleteAllByRecruitmentNoticeId(recruitmentId);
@@ -64,6 +64,12 @@ public class RecruitmentNoticeServiceImpl implements RecruitmentNoticeService {
 	@Override
 	public List<RecruitmentNoticeInfo.RecruitmentNoticeList> findAllRecruitmentNotice() {
 		List<RecruitmentNotice> recruitmentNotices = recruitmentNoticeReader.findAll();
-		return mappingFactory.generateRecruitmentNoticeDetails(recruitmentNotices);
+		return mappingFactory.generateRecruitmentNoticesWithDetails(recruitmentNotices);
+	}
+
+	@Override
+	public RecruitmentNoticeInfo.DetailsRecruitmentNotice detailsRecruitmentNotice(Long recruitmentNoticeId) {
+		RecruitmentNotice recruitmentNotice = recruitmentNoticeReader.findById(recruitmentNoticeId);
+		return mappingFactory.generateDetailsRecruitmentNotice(recruitmentNotice);
 	}
 }
