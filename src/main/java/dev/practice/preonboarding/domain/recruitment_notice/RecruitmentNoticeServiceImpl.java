@@ -8,15 +8,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import dev.practice.preonboarding.common.exception.EntityNotFoundException;
 import dev.practice.preonboarding.domain.recruitment_notice_tech_stack.RecruitmentNoticeTechStackMapping;
+import dev.practice.preonboarding.domain.recruitment_notice_tech_stack.RecruitmentNoticeTechStackMappingFactory;
 import dev.practice.preonboarding.domain.recruitment_notice_tech_stack.RecruitmentNoticeTechStackMappingStore;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class RecruitmentNoticeServiceImpl implements RecruitmentNoticeService {
 	private final RecruitmentNoticeStore recruitmentNoticeStore;
 	private final RecruitmentNoticeTechStackMappingStore mappingStore;
 	private final RecruitmentNoticeReader recruitmentNoticeReader;
+	private final RecruitmentNoticeTechStackMappingFactory mappingFactory;
 
 	@Override
 	@Transactional
@@ -56,5 +59,11 @@ public class RecruitmentNoticeServiceImpl implements RecruitmentNoticeService {
 		}
 		recruitmentNoticeStore.delete(recruitmentId);
 		mappingStore.deleteAllByRecruitmentNoticeId(recruitmentId);
+	}
+
+	@Override
+	public List<RecruitmentNoticeInfo.RecruitmentNoticeList> findAllRecruitmentNotice() {
+		List<RecruitmentNotice> recruitmentNotices = recruitmentNoticeReader.findAll();
+		return mappingFactory.generateRecruitmentNoticeDetails(recruitmentNotices);
 	}
 }

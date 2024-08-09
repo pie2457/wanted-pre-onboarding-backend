@@ -5,6 +5,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
 import dev.practice.preonboarding.domain.recruitment_notice.RecruitmentNoticeCommand;
+import dev.practice.preonboarding.domain.recruitment_notice.RecruitmentNoticeInfo;
 
 @Mapper(
 	componentModel = "spring",
@@ -18,4 +19,7 @@ public interface RecruitmentNoticeDtoMapper {
 
 	RecruitmentNoticeCommand.ModifyRecruitmentNoticeRequest of(
 		RecruitmentNoticeDto.ModifyRecruitmentNoticeRequest request);
+
+	RecruitmentNoticeDto.RecruitmentNoticeListResponse of(
+		RecruitmentNoticeInfo.RecruitmentNoticeList recruitmentNoticeList);
 }

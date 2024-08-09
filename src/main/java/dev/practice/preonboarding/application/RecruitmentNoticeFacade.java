@@ -1,8 +1,11 @@
 package dev.practice.preonboarding.application;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import dev.practice.preonboarding.domain.recruitment_notice.RecruitmentNoticeCommand;
+import dev.practice.preonboarding.domain.recruitment_notice.RecruitmentNoticeInfo;
 import dev.practice.preonboarding.domain.recruitment_notice.RecruitmentNoticeService;
 import lombok.RequiredArgsConstructor;
 
@@ -23,5 +26,9 @@ public class RecruitmentNoticeFacade {
 
 	public void deleteRecruitmentNotice(Long recruitmentNoticeId) {
 		recruitmentNoticeService.deleteRecruitmentNotice(recruitmentNoticeId);
+	}
+
+	public List<RecruitmentNoticeInfo.RecruitmentNoticeList> findAllRecruitmentNotice() {
+		return recruitmentNoticeService.findAllRecruitmentNotice();
 	}
 }
